@@ -42,6 +42,7 @@ public class TimerUtil
     {
         return timer;
     }
+
     /// <summary>
     /// </summary>
     /// <returns> float in range <0-1></returns>
@@ -49,6 +50,7 @@ public class TimerUtil
     {
         return timer / timerLimit;
     }
+
     /// <summary>
     /// </summary>
     /// <returns> float in range<1-0></returns>

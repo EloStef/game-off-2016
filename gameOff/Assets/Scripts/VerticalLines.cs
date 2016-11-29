@@ -90,4 +90,11 @@ public class VerticalLines : MonoBehaviour {
         }
         return true;
     }
+
+    public int getCurrentLine()
+    {
+        if(nowLine != targetLine)
+            return -1;
+        return (int)System.Math.Round(nowLine / width, 0) + 3;
+    }
 }

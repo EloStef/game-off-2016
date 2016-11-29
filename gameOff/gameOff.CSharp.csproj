@@ -65,9 +65,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Element.cs" />
     <Compile Include="Assets\Scripts\ElementsController.cs" />
+    <Compile Include="Assets\Scripts\Menu\GuiStartPosition.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\MovingScript.cs" />
     <Compile Include="Assets\Scripts\TextureShowHide.cs" />
     <Compile Include="Assets\Scripts\Utils\Array.cs" />
+    <Compile Include="Assets\Scripts\Utils\Score.cs" />
     <Compile Include="Assets\Scripts\Utils\TimerUtil.cs" />
     <Compile Include="Assets\Scripts\VerticalLines.cs" />
   </ItemGroup>

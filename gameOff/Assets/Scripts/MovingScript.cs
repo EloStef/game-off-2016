@@ -11,10 +11,13 @@ public class MovingScript : VerticalLines
     public Transform groundCheck;
     float groundRadius = 0.3f;
     public LayerMask whatIsGround;
+
+    private Rigidbody2D rig;
     // Use this for initialization
     void Start()
     {
         base.Start();
+        rig = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -27,15 +30,19 @@ public class MovingScript : VerticalLines
     {
         base.FixedUpdate();
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        if(grounded)
-            Jump();
+
+        Jump();
     }
 
     private void Jump()
     {
         if (Input.GetKey("w"))
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 20), ForceMode2D.Impulse);
+        }
+        if (Mathf.Abs(rig.velocity.y) > jumpHeight)
+        {
+            rig.velocity = new Vector2(rig.velocity.x, (rig.velocity.normalized * jumpHeight).y);
         }
     }
 

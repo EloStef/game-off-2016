@@ -20,7 +20,7 @@ public class TextureShowHide : MonoBehaviour {
 	void Update () {
         if (isDisapearing)
         {
-                removePixel(20);
+                removePixel(800);
         }
 	}
 
@@ -32,7 +32,7 @@ public class TextureShowHide : MonoBehaviour {
 
     void removePixel(int amount)
     {
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount * Time.deltaTime; i++)
         {
             if (texturePixels.Length < 1)
             {

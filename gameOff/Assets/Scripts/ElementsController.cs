@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ElementsController : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class ElementsController : MonoBehaviour
 
     private TimerUtil timeToCreate;
     private float widthOfElements = 1f;
+
+    private Score score;
     // Use this for initialization
     void Start()
     {
         mapArray = new Transform[elementsInLine, elementsInColumn];
         timeToCreate = new TimerUtil(1f);
         widthOfElements = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>().bounds.size.x;
+        score = new Score(0);
     }
 
     // Update is called once per frame
@@ -43,12 +47,19 @@ public class ElementsController : MonoBehaviour
         GameObject[] elements = GameObject.FindGameObjectsWithTag("Elements");
         foreach (GameObject element in elements)
         {
+            Element tempElement = element.GetComponent<Element>();
+            if(tempElement != null && tempElement.transform.name != "none")
             if (element.GetComponent<Element>().isGrounded())
             {
                 int y = getYInArray(element.transform.position.y);
-                int x = getXInArray(element.transform.position.x);
-                if (y < elementsInColumn && x <elementsInLine)
-                    mapArray[getXInArray(element.transform.position.x), y] = element.transform;
+                if(y >= elementsInColumn)
+                    {
+                        LooseGame();
+                        return;
+                    }
+                int x = element.GetComponent<VerticalLines>().getCurrentLine();
+                if (y > -1 && y < elementsInColumn && x > -1 && x <elementsInLine)
+                    mapArray[(int)x, (int)y] = element.transform;
             }
         }
     }
@@ -81,15 +92,18 @@ public class ElementsController : MonoBehaviour
                     IEnumerable<int> iEnumerable = list.Union(list);
                     if (iEnumerable.Count() > 2)
                     {
+                        score.addPoints(iEnumerable.Count());
                         iEnumerable.ToList().ForEach(
                             item => {
                                 //GameObject.Destroy(mapArray[(int)Mathf.Floor(item / 1000), item - (int)Mathf.Floor(item / 1000) * 1000].gameObject);
                                 mapArray[(int)Mathf.Floor(item / 1000), item - (int)Mathf.Floor(item / 1000) * 1000].gameObject.GetComponent<Element>().DestroyElement();
-                                //mapArray[(int)Mathf.Floor(item / 1000), item - (int)Mathf.Floor(item / 1000) * 1000] = null;
+                                mapArray[(int)Mathf.Floor(item / 1000), item - (int)Mathf.Floor(item / 1000) * 1000] = null;
                             });
                     }
                 }
             }
+        //Ustawianie AKTULANEJ wartośći punktów w obiekcie GUI TEXT POINTS
+        GameObject.FindGameObjectWithTag("Points").GetComponent<Text>().text = score.getCurrentPoints();
     }
 
     List<int> findAllTheSameElements(int x, int y, string elementKind, List<int> currentList)
@@ -131,4 +145,15 @@ public class ElementsController : MonoBehaviour
     {
         return (int)Mathf.Floor(yposition / widthOfElements) + 4;
     }
+
+    void LooseGame()
+    {
+        GameObject[] elements = GameObject.FindGameObjectsWithTag("Elements");
+        foreach (GameObject element in elements)
+        {
+            element.GetComponent<Element>().DestroyElement();
+        }
+        GameObject.FindGameObjectWithTag("MenuController").GetComponent<Menu>().setActiveCanvas("MainCanvas");
+        Destroy(gameObject);
+        }
 }
