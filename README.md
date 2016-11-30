@@ -1,7 +1,7 @@
 <h1>PING 127.0.0.1</h1>
 
 <h2>Download</h2>
-https://itch.io/search?q=ping127001
+https://stivi.itch.io/ping127001
 
 <h2>About Game</h2>
 Kind of puzzle game where you move objects with your character to put them next to each other.
