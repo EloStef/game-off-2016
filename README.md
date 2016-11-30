@@ -4,7 +4,7 @@
 https://itch.io/search?q=ping127001
 
 <h2>About Game</h2>
-Kind of puzzle game where you move objects by your character to put them next to each others.
+Kind of puzzle game where you move objects with your character to put them next to each other.
 
 <br>
 Become a robot and do your best to save your homeland from internet attacks. Good luck, I hope that your defence and sharp mind will manage these evil hackers.
