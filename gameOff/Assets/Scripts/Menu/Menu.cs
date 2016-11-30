@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
 
+    void Start()
+    {
+        GameObject.FindGameObjectWithTag("Score").GetComponent<Text>().text = Score.getBestScore().ToString();
+    } 
+
     public void loadScene(string name)
     {
         SceneManager.LoadScene(name);

@@ -7,7 +7,8 @@ public class GuiStartPosition : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos.position);
-        GetComponent<RectTransform>().position = screenPos;
+        //GetComponent<RectTransform>().position = screenPos;
+        GetComponent<RectTransform>().position = pos.position;
     }
 	
 	// Update is called once per frame

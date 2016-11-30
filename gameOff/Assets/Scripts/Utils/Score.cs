@@ -4,10 +4,12 @@ using System;
 public class Score
 {
     private int points = 0;
+    private int highScore = 0;
 
     public Score(int points)
     {
         this.points = points;
+        this.highScore = PlayerPrefs.GetInt("High Score");
     }
 
     public void Update()
@@ -37,13 +39,14 @@ public class Score
         return return_;
     }
 
-    public void getBestScore()
+    public static int getBestScore()
     {
-
+        return PlayerPrefs.GetInt("High Score");
     }
 
     public void saveIfBestScore()
     {
-
+        if (points > PlayerPrefs.GetInt("High Score"))
+            PlayerPrefs.SetInt("High Score", points);
     }
 }

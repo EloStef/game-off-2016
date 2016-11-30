@@ -28,7 +28,7 @@ public class Element : VerticalLines {
     public void DestroyElement()
     {
         transform.name = "none";
-        GetComponentInChildren<TextureShowHide>().runDisapearing();
+        GetComponentInChildren<TextureShowHide>().runDisapearing(800);
     }
 
     public bool isGrounded()

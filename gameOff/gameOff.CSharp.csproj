@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Element.cs" />
     <Compile Include="Assets\Scripts\ElementsController.cs" />
+    <Compile Include="Assets\Scripts\Menu\DestroyAfterAnimation.cs" />
     <Compile Include="Assets\Scripts\Menu\GuiStartPosition.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\MovingScript.cs" />
