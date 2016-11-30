@@ -5,7 +5,8 @@ public class Sounds : MonoBehaviour {
 
     public AudioClip scoreSound;
     AudioSource audio;
-    private bool musicOn = true;
+    public bool musicOn = true;
+    public bool destroy = false;
 
     void Awake()
     {
@@ -16,13 +17,23 @@ public class Sounds : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-
+        Sprite[] soundSprites = Resources.LoadAll<Sprite>("sounds");
+        musicOn = GameObject.FindGameObjectWithTag("Sound").GetComponent<Sounds>().musicOn;
+        if (musicOn)
+            GameObject.FindGameObjectWithTag("SoundIcon").GetComponent<SpriteRenderer>().sprite = soundSprites[0];
+        else
+            GameObject.FindGameObjectWithTag("SoundIcon").GetComponent<SpriteRenderer>().sprite = soundSprites[1];
     }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void changemusiconState()
+    {
+        GameObject.FindGameObjectWithTag("Sound").GetComponent<Sounds>().changeMusicState();
+    }
 
     public void changeMusicState()
     {
