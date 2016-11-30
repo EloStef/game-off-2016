@@ -11,6 +11,8 @@ public class TextureShowHide : MonoBehaviour {
     private Texture2D creatingTexture;
     private int speed = 800;
 
+    private bool cascadeDistapering = false;
+
     // Use this for initialization
     void Awake ()
     {
@@ -88,6 +90,19 @@ public class TextureShowHide : MonoBehaviour {
             texture.SetPixel(x, y, new Color(0F, 0F, 0F, 0F));
             texturePixels = texturePixels.RemoveFromArray(xyOfPixel);
         }
+        if(texturePixels.Length < 500)
+        {
+            if (cascadeDistapering)
+            {
+                GameObject[] elements = GameObject.FindGameObjectsWithTag("Elements");
+                for (int i = 0; i < 2; i++)
+                {
+
+                    elements[Random.Range(0, elements.Length)].GetComponentInChildren<TextureShowHide>().cascadeDisapearing();
+                }
+            }
+            cascadeDistapering = false;
+        }
         texture.Apply();
     }
 
@@ -114,5 +129,15 @@ public class TextureShowHide : MonoBehaviour {
                 texturePixels[y * texture.height + x] = (y * 1000) + x;
             }
         }
+    }
+
+    /// <summary>
+    /// start disapering this object and turn cascede to true 
+    /// then when object will be destroyed it will destroy next 3 elements with tag Element
+    /// </summary>
+    public void cascadeDisapearing()
+    {
+        runDisapearing(2000);
+        cascadeDistapering = true;
     }
 }

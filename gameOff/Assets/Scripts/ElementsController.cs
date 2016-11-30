@@ -25,7 +25,7 @@ public class ElementsController : MonoBehaviour
     void Start()
     {
         mapArray = new Transform[elementsInLine, elementsInColumn];
-        timeToCreate = new TimerUtil(1.2f);
+        timeToCreate = new TimerUtil(1.1f);
         widthOfElements = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>().bounds.size.x;
         score = new Score(0);
         numberPrefab = Resources.Load("ScoreNumber") as GameObject;
@@ -210,11 +210,7 @@ public class ElementsController : MonoBehaviour
     {
         removeNextElements();
 
-        GameObject[] elements = GameObject.FindGameObjectsWithTag("Elements");
-        foreach (GameObject element in elements)
-        {
-            element.GetComponent<Element>().DestroyElement();
-        }
+        GameObject.FindGameObjectWithTag("Elements").GetComponentInChildren<TextureShowHide>().cascadeDisapearing();
 
         score.saveIfBestScore();
         GameObject.FindGameObjectWithTag("Score").GetComponent<Text>().text = Score.getBestScore().ToString();
