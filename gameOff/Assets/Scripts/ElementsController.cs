@@ -19,6 +19,7 @@ public class ElementsController : MonoBehaviour
     private Score score;
     private GameObject numberPrefab;
     private Sprite[] spritesNumber;
+    private Sounds soundController;
 
     // Use this for initialization
     void Start()
@@ -30,6 +31,7 @@ public class ElementsController : MonoBehaviour
         numberPrefab = Resources.Load("ScoreNumber") as GameObject;
         spritesNumber = Resources.LoadAll<Sprite>("Numbers");
         nextElement = Random.Range(0, elementsAmount);
+        soundController = GameObject.FindGameObjectWithTag("Sound").GetComponent<Sounds>();
     }
 
     // Update is called once per frame
@@ -190,6 +192,7 @@ public class ElementsController : MonoBehaviour
     {
         if (points < 1)
             return;
+        soundController.playScoreUp();
         score.addPoints(points);
         if (points < 10)
             numberPrefab.GetComponent<SpriteRenderer>().sprite = spritesNumber[points];
