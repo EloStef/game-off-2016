@@ -20,6 +20,3 @@ Run ping127001.exe
 <h2>Dependencies</h2>
 Available platform:
 - Windows
-
-<h3>Follow me on twitter</h3>
-https://twitter.com/stef_elo
